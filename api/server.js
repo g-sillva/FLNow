@@ -1,6 +1,7 @@
 import express from 'express';
 import mongoose from 'mongoose';
 import dotenv from 'dotenv';
+import cookieParser from 'cookie-parser';
 
 import userRoute from './routes/user.route.js';
 import serviceRoute from './routes/service.route.js';
@@ -22,6 +23,7 @@ try {
 }
 
 app.use(express.json());
+app.use(cookieParser());
 
 app.use('/api/users', userRoute);
 app.use('/api/services', serviceRoute);
