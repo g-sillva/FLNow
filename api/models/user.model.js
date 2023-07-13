@@ -5,12 +5,10 @@ const UserSchema = new Schema({
     username: {
         type: String,
         required: true,
-        unique: true
     },
     email: {
         type: String,
         required: true,
-        unique: true
     },
     description: {
         type: String,
@@ -32,6 +30,10 @@ const UserSchema = new Schema({
         type: String,
         required: true,
     },
+    banReason: {
+        type: String,
+        required: false,
+    },
     isSeller: {
         type: Boolean,
         default: false
@@ -39,6 +41,14 @@ const UserSchema = new Schema({
     isBanned: {
         type: Boolean,
         default: false
+    },
+    isDeleted: {
+        type: Boolean,
+        default: false
+    },
+    deletedAt: {
+        type: Date,
+        required: false
     }
 }, {
     timestamps: true

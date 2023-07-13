@@ -11,7 +11,7 @@ export const register = async (req, res) => {
         });
 
         await newUser.save();
-        res.status(201).send("User has been created!");
+        res.status(201).send({ message: 'User has been created!' });
 
     } catch (err) {
         res.status(500).send({ message: err.message });
@@ -20,8 +20,8 @@ export const register = async (req, res) => {
 
 export const login = async (req, res) => {
     try {
-        const user = await User.findOne({ username: req.body.username });
-        if (!user) return res.status(404).send({ message: 'User not found' });
+        const user = await User.findOne({ email: req.body.email, isDeleted: false });
+        if (!user) return res.status(404).send({ message: 'User not found.' });
 
         const isPassCorrect = bcrypt.compareSync(req.body.password, user.password);
         if (!isPassCorrect) return res.status(400).send({ message: 'Wrong password.' });
