@@ -37,7 +37,7 @@ export const login = async (req, res, next) => {
         }, process.env.JWT_KEY);
 
         const { ...info } = user;
-        res.cookie("accessToken", token, { httpOnly: true }).status(200).send(info._doc);
+        res.cookie('accessToken', token, { httpOnly: true }).status(200).send(info._doc);
 
     } catch (err) {
         return next(err)
@@ -45,5 +45,8 @@ export const login = async (req, res, next) => {
 }
 
 export const logout = (req, res) => {
-    // TODO
+    res.clearCookie('accessToken', {
+        sameSite: 'none',
+        secure: true
+    }).status(200).send({ message: 'User has been logged out.', code: 200 });
 }
