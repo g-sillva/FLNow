@@ -1,8 +1,9 @@
 import User from "../models/user.model.js";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
+import createError from "../utils/createError.js";
 
-export const register = async (req, res) => {
+export const register = async (req, res, next) => {
     try {
         const hash = bcrypt.hashSync(req.body.password, 5);
         const newUser = new User({
@@ -14,17 +15,21 @@ export const register = async (req, res) => {
         res.status(201).send({ message: 'User has been created!' });
 
     } catch (err) {
-        res.status(500).send({ message: err.message });
+        next(err);
     }
 }
 
-export const login = async (req, res) => {
+export const login = async (req, res, next) => {
     try {
         const user = await User.findOne({ email: req.body.email, isDeleted: false });
-        if (!user) return res.status(404).send({ message: 'User not found.' });
+        if (!user) {
+            return next(createError(404, 'User not found.'));
+        }
 
         const isPassCorrect = bcrypt.compareSync(req.body.password, user.password);
-        if (!isPassCorrect) return res.status(400).send({ message: 'Wrong password.' });
+        if (!isPassCorrect) {
+            return next(createError(400, 'Wrong password.'));
+        }
 
         const token = jwt.sign({
             id: user._id,
@@ -35,7 +40,7 @@ export const login = async (req, res) => {
         res.cookie("accessToken", token, { httpOnly: true }).status(200).send(info._doc);
 
     } catch (err) {
-        res.status(500).send({ message: err.message });
+        return next(err)
     }
 }
 
