@@ -20,14 +20,20 @@ time, mark, audio, video {
 	font: inherit;
 	vertical-align: baseline;
     font-family: 'Open Sans', sans-serif;
+	text-decoration: none;
+	color: #1a1a1a;
 }
 /* HTML5 display-role reset for older browsers */
 article, aside, details, figcaption, figure, 
 footer, header, hgroup, menu, nav, section {
 	display: block;
 }
+a:visited {
+	color: #1a1a1a;
+}
 body {
 	line-height: 1;
+	height: 200vh;
 }
 ol, ul {
 	list-style: none;
