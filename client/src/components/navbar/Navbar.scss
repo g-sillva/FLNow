@@ -8,15 +8,18 @@
     top: 0;
     z-index: 999;
     transition: 0.5s all ease;
+    width: 100%;
   
     &.active {
         border-bottom-color: #dddddd;
     }
   
     .container {
-      width: 1400px;
+      max-width: 1400px;
+      width: 100%;
       display: flex;
       align-items: center;
+      position: relative;
       justify-content: space-between;
       padding: 10px 0px;
   
@@ -36,6 +39,31 @@
           cursor: pointer;
 
           &:hover, &:hover i {
+              color: #3776ff;
+          }
+        }
+      }
+
+      .language-options {
+        position: absolute;
+        top: 50px;
+        left: 54%;
+        padding: 20px;
+        background-color: white;
+        border-radius: 5px;
+        z-index: 999;
+        border: 1px solid #dddddd;
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        font-weight: 300;
+        color: rgb(73, 73, 73);
+
+        p {
+          transition: all .1s ease-in-out;
+          cursor: pointer;
+
+          &:hover {
               color: #3776ff;
           }
         }

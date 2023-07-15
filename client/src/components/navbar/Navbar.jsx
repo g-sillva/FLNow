@@ -5,7 +5,8 @@ import "./Navbar.scss";
 
 function Navbar() {
   const [active, setActive] = useState(false);
-  const [open, setOpen] = useState(false);
+  const [profileOptionsOpen, setProfileOptionsOpen] = useState(false);
+  const [languageOptionsOpen, setLanguageOptionsOpen] = useState(false);
 
   const { pathname } = useLocation();
 
@@ -46,13 +47,19 @@ function Navbar() {
           <Link to="/">Home</Link>
           <Link to="/">Explore</Link>
           <Link to="/faq">FAQ</Link>
-          <span>English <i className="fa-solid fa-chevron-down"></i></span>
+          <span onClick={() => setLanguageOptionsOpen(!languageOptionsOpen)}>English <i className="fa-solid fa-chevron-down"></i></span>
         </div>
+        {languageOptionsOpen && (
+            <div className="language-options">
+                <p>English</p>
+                <p>Deutsch</p>
+            </div>
+        )}
           {currentUser ? (
-            <div className="user" onClick={() => setOpen(!open)}>
+            <div className="user" onClick={() => setProfileOptionsOpen(!profileOptionsOpen)}>
               <img src={currentUser.img || "/img/avatar.jpg"} alt="" />
               <span>{currentUser?.username}</span>
-              {open && (
+              {profileOptionsOpen && (
                 <div className="options">
                   {currentUser.isSeller && (
                     <>
