@@ -21,6 +21,7 @@
       .login-input-container {
         display: flex;
         flex-direction: column;
+        position: relative;
 
         label {
             color: #C4C4C4;
@@ -34,6 +35,20 @@
             border: 2px solid rgb(199, 199, 199);
             border-radius: 7px;
             outline: none;
+          }
+
+          .fa-eye, .fa-eye-slash {
+            position: absolute;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            right: 20px;
+            top: 50%;
+            width: 20px;
+            height: 16px;
+            transform: translateY(50%);
+            color: #1a1a1a;
+            cursor: pointer;
           }
       }
 

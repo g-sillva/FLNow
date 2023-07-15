@@ -1,8 +1,11 @@
 import React from "react";
+import { useState } from "react";
 import { GoogleLogin } from '@react-oauth/google';
 import "./Login.scss";
 
 function Login() {
+  const [isPasswordVisible, setIsPasswordVisible] = useState(false);
+
   return (
     <div className="login">
       <form>
@@ -21,8 +24,10 @@ function Login() {
           <label htmlFor="">Password</label>
           <input
             name="password"
-            type="password"
+            type={isPasswordVisible ? "text" : "password"}
           />
+          <i className={`fa-solid ${isPasswordVisible ? 'fa-eye-slash' : 'fa-eye'}`}
+             onClick={() => setIsPasswordVisible(!isPasswordVisible)}></i>
         </div>
 
         <div className="login-bottom-row">
