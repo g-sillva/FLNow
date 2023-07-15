@@ -58,6 +58,18 @@
           }
       }
 
+      .login-error-message {
+        padding: 10px;
+        margin: -20px 0;
+        font-size: 14px;
+        border-radius: 5px;
+        color: red;
+
+        span {
+          font-weight: bold;
+        }
+      }
+
       .login-bottom-row {
         display: flex;
         align-items: center;
