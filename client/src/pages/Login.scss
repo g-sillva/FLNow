@@ -35,6 +35,12 @@
             border: 2px solid rgb(199, 199, 199);
             border-radius: 7px;
             outline: none;
+            transition: all .1s ease-in-out;
+
+            &:hover, &:focus {
+                border-bottom-color: #3776ff;
+                border-color: #3776ff;
+            }
           }
 
           .fa-eye, .fa-eye-slash {
@@ -68,6 +74,11 @@
             font-size: 16px;
             background-color: #3776ff;
             cursor: pointer;
+            transition: background .1s ease;
+
+            &:hover {
+                background-color: #417dff;
+            }
           }
       
           p {
