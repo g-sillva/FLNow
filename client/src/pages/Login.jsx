@@ -5,6 +5,8 @@ import "./Login.scss";
 
 function Login() {
   const [isPasswordVisible, setIsPasswordVisible] = useState(false);
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
 
   return (
     <div className="login">
@@ -17,6 +19,7 @@ function Login() {
             name="email"
             type="text"
             placeholder="your@email.com"
+            onChange={(e) => setEmail(e.target.value)}
           />
         </div>
 
@@ -25,6 +28,7 @@ function Login() {
           <input
             name="password"
             type={isPasswordVisible ? "text" : "password"}
+            onChange={(e) => setPassword(e.target.value)}
           />
           <i className={`fa-solid ${isPasswordVisible ? 'fa-eye-slash' : 'fa-eye'}`}
              onClick={() => setIsPasswordVisible(!isPasswordVisible)}></i>
