@@ -11,7 +11,13 @@ export const getServices = async (req, res, next) => {
 }
 
 export const getService = async (req, res, next) => {
-    
+    try {
+        const service = await Service.findById(req.params.id);
+        if (!service) return next(createError(404, "Service not found."));
+        res.status(200).json(service);
+    } catch (err) {
+        next(err);
+    }
 }
 
 export const createService = async (req, res, next) => {
