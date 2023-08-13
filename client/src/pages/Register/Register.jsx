@@ -1,7 +1,7 @@
 import React from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
-import { GoogleLogin } from '@react-oauth/google';
+import { GoogleLogin } from "@react-oauth/google";
 import "./Register.scss";
 import newRequest from "../../utils/newRequest";
 
@@ -18,20 +18,34 @@ function Register() {
 
   const navigate = useNavigate();
 
-   const handleSubmit = async (e) => {
-      e.preventDefault();
-      setError("");
+  const validatePassword = () => {
+    if (password !== passwordRepeat) {
+      setError("Password is not the same.");
+      return false;
+    }
+    return true;
+  };
 
-      try {
-        const res = await newRequest.post('/auth/register', { email, phone, country, username, password });
-        localStorage.setItem("user", JSON.stringify(res.data));
-        navigate("/")
-      } catch (err) {
-        setError(err.response.data.message);
-        console.log(err);
-      }
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setError("");
+    if (!validatePassword()) return;
 
-   }
+    try {
+      const res = await newRequest.post("/auth/register", {
+        email,
+        phone,
+        country,
+        username,
+        password,
+      });
+      localStorage.setItem("user", JSON.stringify(res.data));
+      navigate("/");
+    } catch (err) {
+      setError(err.response.data.message);
+      console.log(err);
+    }
+  };
 
   return (
     <div className="register">
@@ -45,6 +59,7 @@ function Register() {
             type="text"
             placeholder="Your username"
             onChange={(e) => setUsername(e.target.value)}
+            required
           />
         </div>
 
@@ -55,6 +70,7 @@ function Register() {
             type="text"
             placeholder="Ex.: (555) 555-1234"
             onChange={(e) => setPhone(e.target.value)}
+            required
           />
         </div>
 
@@ -66,6 +82,7 @@ function Register() {
             type="text"
             placeholder="Ex.: United States of America"
             onChange={(e) => setCountry(e.target.value)}
+            required
           />
         </div>
 
@@ -77,6 +94,7 @@ function Register() {
             type="text"
             placeholder="your@email.com"
             onChange={(e) => setEmail(e.target.value)}
+            required
           />
         </div>
 
@@ -87,9 +105,14 @@ function Register() {
             id="password"
             type={isPasswordVisible ? "text" : "password"}
             onChange={(e) => setPassword(e.target.value)}
+            required
           />
-          <i className={`fa-solid ${isPasswordVisible ? 'fa-eye-slash' : 'fa-eye'}`}
-             onClick={() => setIsPasswordVisible(!isPasswordVisible)}></i>
+          <i
+            className={`fa-solid ${
+              isPasswordVisible ? "fa-eye-slash" : "fa-eye"
+            }`}
+            onClick={() => setIsPasswordVisible(!isPasswordVisible)}
+          ></i>
         </div>
 
         <div className="register-input-container">
@@ -100,17 +123,25 @@ function Register() {
             type={isPasswordRepeatVisible ? "text" : "password"}
             onChange={(e) => setPasswordRepeat(e.target.value)}
           />
-          <i className={`fa-solid ${isPasswordRepeatVisible ? 'fa-eye-slash' : 'fa-eye'}`}
-             onClick={() => setIsPasswordRepeatVisible(!isPasswordRepeatVisible)}></i>
+          <i
+            className={`fa-solid ${
+              isPasswordRepeatVisible ? "fa-eye-slash" : "fa-eye"
+            }`}
+            onClick={() => setIsPasswordRepeatVisible(!isPasswordRepeatVisible)}
+          ></i>
         </div>
 
-        {error !== "" && <p className="register-error-message"><span>Error:</span> {error}</p>}
+        {error !== "" && (
+          <p className="register-error-message">Error: {error}</p>
+        )}
 
-        <div className="register-bottom-row"> 
+        <div className="register-bottom-row">
           <button type="submit">register</button>
         </div>
 
-        <p className="register-bottom-account-text">Already have an account? <Link to='/login'>enter now!</Link></p>
+        <p className="register-bottom-account-text">
+          Already have an account? <Link to="/login">enter now!</Link>
+        </p>
 
         <div className="register-form-topic-title">
           <span></span>
@@ -119,14 +150,13 @@ function Register() {
         </div>
 
         <GoogleLogin
-          onSuccess={credentialResponse => {
+          onSuccess={(credentialResponse) => {
             console.log(credentialResponse);
           }}
           onError={() => {
-            console.log('register Failed');
+            console.log("register Failed");
           }}
         />
-        
       </form>
     </div>
   );
