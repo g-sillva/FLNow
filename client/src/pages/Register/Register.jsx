@@ -23,7 +23,7 @@ function Register() {
       setError("");
 
       try {
-        const res = await newRequest.post('/auth/register', { email, username, password });
+        const res = await newRequest.post('/auth/register', { email, phone, country, username, password });
         localStorage.setItem("user", JSON.stringify(res.data));
         navigate("/")
       } catch (err) {
@@ -44,7 +44,7 @@ function Register() {
             name="email"
             type="text"
             placeholder="Your username"
-            onChange={(e) => setEmail(e.target.value)}
+            onChange={(e) => setUsername(e.target.value)}
           />
         </div>
 
