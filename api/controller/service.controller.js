@@ -2,7 +2,12 @@ import createError from "../utils/createError.js";
 import Service from "../models/service.model.js";
 
 export const getServices = async (req, res, next) => {
-    
+    try {
+        const services = await Service.find();
+        res.status(200).json(services);
+    } catch (err) {
+        next(err);
+    }
 }
 
 export const getService = async (req, res, next) => {
