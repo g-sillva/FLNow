@@ -9,6 +9,7 @@ function Register() {
   const [isPasswordVisible, setIsPasswordVisible] = useState(false);
   const [isPasswordRepeatVisible, setIsPasswordRepeatVisible] = useState(false);
   const [email, setEmail] = useState("");
+  const [isSeller, setIsSeller] = useState(false);
   const [username, setUsername] = useState("");
   const [phone, setPhone] = useState("");
   const [country, setCountry] = useState("");
@@ -38,6 +39,7 @@ function Register() {
         country,
         username,
         password,
+        isSeller,
       });
       localStorage.setItem("user", JSON.stringify(res.data));
       navigate("/");
@@ -137,6 +139,10 @@ function Register() {
 
         <div className="register-bottom-row">
           <button type="submit">register</button>
+          <div>
+            <input type="checkbox" id="seller" onChange={() => setIsSeller(!isSeller)}/>
+            <label htmlFor="seller">I will be a seller</label>
+          </div>
         </div>
 
         <p className="register-bottom-account-text">
