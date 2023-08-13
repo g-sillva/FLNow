@@ -26,5 +26,18 @@ export const createService = async (req, res, next) => {
 }
 
 export const deleteService = async (req, res, next) => {
-    
+    try {
+        const service = await Service.findById(req.params.id);
+
+        if (!service) return next(createError(404, "Service not found."));
+
+        if (service.userId !== req.userId) {
+            return next(createError(403, "You can only delete your own services."));
+        }
+
+        await Service.findByIdAndDelete(req.params.id);
+        res.status(200).json({ message: 'Service has been deleted.', code: 200 }); 
+    } catch (err) {
+        next(err);
+    }
 }
