@@ -1,0 +1,133 @@
+.login {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  
+    form {
+      width: 360px;
+      padding: 40px 0px;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+  
+      h1 {
+        color: #1a1a1a;
+        text-align: center;
+        font-weight: bold;
+        margin-bottom: 30px;
+        font-size: 24px;
+      }
+
+      .login-input-container {
+        display: flex;
+        flex-direction: column;
+        position: relative;
+
+        label {
+            color: #C4C4C4;
+            font-size: 14px;
+            margin: 10px 0;
+            font-weight: 600;
+          }
+      
+          input {
+            padding: 15px;
+            border: 1px solid rgb(199, 199, 199);
+            border-radius: 7px;
+            outline: none;
+            transition: all .1s ease-in-out;
+
+            &:hover, &:focus {
+                border-bottom-color: #3776ff;
+                border-color: #3776ff;
+            }
+          }
+
+          .fa-eye, .fa-eye-slash {
+            position: absolute;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            right: 20px;
+            top: 50%;
+            width: 20px;
+            height: 20px;
+            transform: translateY(50%);
+            color: #1a1a1a;
+            cursor: pointer;
+          }
+      }
+
+      .login-error-message {
+        padding: 10px;
+        margin: -20px 0;
+        font-size: 14px;
+        border-radius: 5px;
+        color: red;
+
+        span {
+          font-weight: bold;
+        }
+      }
+
+      .login-bottom-row {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-top: 30px;
+
+
+        button {
+            border: none;
+            padding: 15px 60px;
+            border-radius: 60px;
+            color: white;
+            font-weight: bold;
+            font-size: 16px;
+            background-color: #3776ff;
+            cursor: pointer;
+            transition: background .1s ease;
+
+            &:hover {
+                background-color: #417dff;
+            }
+          }
+      
+          p {
+            color: #3776ff;
+            font-size: 14px;
+          }
+      }
+
+      .login-bottom-account-text {
+        font-weight: 600;
+        color: #1a1a1a;
+        font-size: 14px;
+
+        a {
+            color: rgb(55, 118, 255);
+            font-size: 14px;
+        }
+      }
+
+      .login-form-topic-title {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        margin: 20px 0;
+
+        span {
+            display: block;
+            flex: 1.1;
+            height: 1px;
+            background: #b6b6b6;
+        }
+
+        p {
+            color: #1a1a1a;
+            font-weight: bold;
+            flex: 1;
+        }
+      }
+    }
+  }

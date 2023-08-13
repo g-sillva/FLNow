@@ -1,9 +1,9 @@
 import React from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { GoogleLogin } from '@react-oauth/google';
 import "./Login.scss";
-import newRequest from "../utils/newRequest";
+import newRequest from "../../utils/newRequest";
 
 function Login() {
   const [isPasswordVisible, setIsPasswordVisible] = useState(false);
@@ -61,7 +61,7 @@ function Login() {
           <p>Forgot password?</p>
         </div>
 
-        <p className="login-bottom-account-text">Don't have an account? <span>create one now!</span></p>
+        <p className="login-bottom-account-text">Don't have an account? <Link to='/register'>create one now!</Link></p>
 
         <div className="login-form-topic-title">
           <span></span>

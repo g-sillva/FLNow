@@ -31,10 +31,6 @@ footer, header, hgroup, menu, nav, section {
 a:visited {
 	color: #1a1a1a;
 }
-body {
-	line-height: 1;
-	height: 200vh;
-}
 ol, ul {
 	list-style: none;
 }
