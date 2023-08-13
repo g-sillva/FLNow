@@ -1,4 +1,4 @@
-const mongoose = require('mongoose');
+import mongoose from 'mongoose';
 const { Schema } = mongoose;
 
 const ServiceSchema = new Schema({
@@ -18,7 +18,7 @@ const ServiceSchema = new Schema({
         type: String,
         required: true,
     },
-    shortTescription: {
+    shortDescription: {
         type: String,
         required: false,
     },
