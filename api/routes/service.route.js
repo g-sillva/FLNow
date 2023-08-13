@@ -1,8 +1,12 @@
 import express from 'express';
-import { func } from '../controller/service.controller.js';
+import { getServices, getService, createService, deleteService } from '../controller/service.controller.js';
+import { verifyToken } from '../middleware/jwtMiddleware.js';
 
 const router = express.Router();
 
-router.get('/test', func);
+router.get('/', verifyToken, getServices);
+router.get('/:id', verifyToken, getService);
+router.post('/', verifyToken, createService);
+router.delete('/:id', verifyToken, deleteService);
 
 export default router;
