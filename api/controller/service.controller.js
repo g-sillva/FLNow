@@ -15,7 +15,7 @@ export const getServices = async (req, res, next) => {
         ...(query.title && { title: { $regex: query.title, $options: "i" } }),
       };
     try {
-        const services = await Service.find(filters);
+        const services = await Service.find(filters).sort({ [query.sort]: -1 });;
         res.status(200).json(services);
     } catch (err) {
         next(err);
