@@ -2,8 +2,20 @@ import createError from "../utils/createError.js";
 import Service from "../models/service.model.js";
 
 export const getServices = async (req, res, next) => {
+    const query = req.query;
+    const filters = {
+        ...(query.userId && { userId: query.userId }),
+        ...(query.category && { category: query.category }),
+        ...((query.min || query.max) && {
+          price: {
+            ...(query.min && { $gt: query.min }),
+            ...(query.max && { $lt: query.max }),
+          },
+        }),
+        ...(query.title && { title: { $regex: query.title, $options: "i" } }),
+      };
     try {
-        const services = await Service.find();
+        const services = await Service.find(filters);
         res.status(200).json(services);
     } catch (err) {
         next(err);
