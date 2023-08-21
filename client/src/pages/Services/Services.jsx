@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import ServiceCard from "../../components/service_card/ServiceCard";
 import "./Services.scss";
 import newRequest from "../../utils/newRequest";
@@ -23,15 +23,36 @@ function Services() {
     queryFn: () =>
       newRequest
         .get(
-          `/services${search}&min=${minRef.current.value}&max=${maxRef.current.value}`
+          `/services${search}&min=${minRef.current.value}&max=${maxRef.current.value}&sort=${sort}`
         )
         .then((res) => res.data),
   });
 
-  const applyFilter = () => {
+  const applySortFilter = (type) => {
+    setSort(type);
+    setOpen(false);
+  }
+
+  const applyMinMaxFilter = () => {
     refetch();
-    console.log("refetch");
   };
+
+  const sortMapper = (type) => {
+    switch (type) {
+      case "createdAt":
+        return "Newest";
+      case "sales":
+        return "Best Selling";
+      case "totalStars":
+        return "Popular";
+      default:
+        return "Newest";
+    }
+  }
+
+  useEffect(() => {
+    refetch();
+  }, [sort])
 
   return (
     <div>
@@ -45,22 +66,19 @@ function Services() {
               <span>Price</span>
               <input ref={minRef} type="number" placeholder="min" />
               <input ref={maxRef} type="number" placeholder="max" />
-              <button onClick={() => applyFilter()}>Apply</button>
+              <button onClick={() => applyMinMaxFilter()}>Apply</button>
             </div>
             <div className="right">
               <span className="sortBy">Sort by</span>
               <span className="sortType">
-                {sort === "sales" ? "Best Selling" : "Newest"}
+                {sortMapper(sort)}
               </span>
               <img src="./img/down.png" alt="" onClick={() => setOpen(!open)} />
               {open && (
                 <div className="rightMenu">
-                  {sort === "sales" ? (
-                    <span onClick={() => {}}>Newest</span>
-                  ) : (
-                    <span onClick={() => {}}>Best Selling</span>
-                  )}
-                  <span onClick={() => {}}>Popular</span>
+                  <span onClick={() => applySortFilter('createdAt')}>Newest</span>
+                  <span onClick={() => applySortFilter('sales')}>Best Selling</span>
+                  <span onClick={() => applySortFilter('totalStars')}>Popular</span>
                 </div>
               )}
             </div>

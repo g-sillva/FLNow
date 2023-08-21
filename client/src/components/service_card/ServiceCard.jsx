@@ -2,7 +2,7 @@ import React from 'react'
 
 function ServiceCard({ item }) {
   return (
-    <div>ServiceCard</div>
+    <div>ServiceCard {item.price}</div>
   )
 }
 
