@@ -1,6 +1,6 @@
 import React from 'react'
 
-function ServiceCard() {
+function ServiceCard({ item }) {
   return (
     <div>ServiceCard</div>
   )

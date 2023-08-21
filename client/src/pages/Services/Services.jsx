@@ -3,6 +3,7 @@ import ServiceCard from "../../components/service_card/ServiceCard";
 import "./Services.scss";
 import newRequest from "../../utils/newRequest";
 import { useQuery } from "@tanstack/react-query";
+import { useLocation } from "react-router-dom";
 
 function Services() {
   const [sort, setSort] = useState("sales");
@@ -10,13 +11,15 @@ function Services() {
   const minRef = useRef();
   const maxRef = useRef();
 
+  const { search } = useLocation();
+
   const {
     isLoading,
     error,
     data: services,
   } = useQuery({
     queryKey: ["repoData"],
-    queryFn: () => newRequest.get("/services").then((res) => res.data),
+    queryFn: () => newRequest.get(`/services${search}`).then((res) => res.data),
   });
 
   return (
