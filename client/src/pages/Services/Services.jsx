@@ -1,5 +1,6 @@
 import React, { useState, useRef } from "react";
 import ServiceCard from "../../components/service_card/ServiceCard";
+import "./Services.scss";
 
 function Services() {
   const [sort, setSort] = useState("sales");
@@ -13,14 +14,13 @@ function Services() {
       <div className="services">
         <div className="container">
           <span className="breadcrumbs">Art > Graphics & Design ></span>
-          <h1>AI Artists</h1>
+          <h1>Services</h1>
           <p>
-            Explore the boundaries of art and technology with Liverr's AI
-            artists
+            Search for the service you want. When you want.
           </p>
           <div className="menu">
             <div className="left">
-              <span>Budget</span>
+              <span>Price</span>
               <input ref={minRef} type="number" placeholder="min" />
               <input ref={maxRef} type="number" placeholder="max" />
               <button>Apply</button>
