@@ -1,13 +1,23 @@
 import React, { useState, useRef } from "react";
 import ServiceCard from "../../components/service_card/ServiceCard";
 import "./Services.scss";
+import newRequest from "../../utils/newRequest";
+import { useQuery } from "@tanstack/react-query";
 
 function Services() {
   const [sort, setSort] = useState("sales");
-  const [data, setData] = useState([]);
   const [open, setOpen] = useState(false);
   const minRef = useRef();
   const maxRef = useRef();
+
+  const {
+    isLoading,
+    error,
+    data: services,
+  } = useQuery({
+    queryKey: ["repoData"],
+    queryFn: () => newRequest.get("/services").then((res) => res.data),
+  });
 
   return (
     <div>
@@ -15,9 +25,7 @@ function Services() {
         <div className="container">
           <span className="breadcrumbs">Art > Graphics & Design ></span>
           <h1>Services</h1>
-          <p>
-            Search for the service you want. When you want.
-          </p>
+          <p>Search for the service you want. When you want.</p>
           <div className="menu">
             <div className="left">
               <span>Price</span>
@@ -44,7 +52,13 @@ function Services() {
             </div>
           </div>
           <div className="cards">
-            {data.map((service) => <ServiceCard key={service._id} item={service} />)}
+            {isLoading
+              ? "loading"
+              : error
+              ? "Something went wrong..."
+              : services.map((service) => (
+                  <ServiceCard key={service._id} item={service} />
+                ))}
           </div>
         </div>
       </div>
