@@ -17,10 +17,21 @@ function Services() {
     isLoading,
     error,
     data: services,
+    refetch,
   } = useQuery({
     queryKey: ["repoData"],
-    queryFn: () => newRequest.get(`/services${search}`).then((res) => res.data),
+    queryFn: () =>
+      newRequest
+        .get(
+          `/services${search}&min=${minRef.current.value}&max=${maxRef.current.value}`
+        )
+        .then((res) => res.data),
   });
+
+  const applyFilter = () => {
+    refetch();
+    console.log("refetch");
+  };
 
   return (
     <div>
@@ -34,7 +45,7 @@ function Services() {
               <span>Price</span>
               <input ref={minRef} type="number" placeholder="min" />
               <input ref={maxRef} type="number" placeholder="max" />
-              <button>Apply</button>
+              <button onClick={() => applyFilter()}>Apply</button>
             </div>
             <div className="right">
               <span className="sortBy">Sort by</span>
