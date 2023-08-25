@@ -23,7 +23,9 @@ function Services() {
     queryFn: () =>
       newRequest
         .get(
-          `/services${search}&min=${minRef.current.value}&max=${maxRef.current.value}&sort=${sort}`
+          `/services${search === "" ? "?" : search + "&"}min=${
+            minRef.current.value
+          }&max=${maxRef.current.value}&sort=${sort}`
         )
         .then((res) => res.data),
   });
@@ -31,7 +33,7 @@ function Services() {
   const applySortFilter = (type) => {
     setSort(type);
     setOpen(false);
-  }
+  };
 
   const applyMinMaxFilter = () => {
     refetch();
@@ -48,11 +50,11 @@ function Services() {
       default:
         return "Newest";
     }
-  }
+  };
 
   useEffect(() => {
     refetch();
-  }, [sort])
+  }, [sort]);
 
   return (
     <div>
@@ -70,15 +72,19 @@ function Services() {
             </div>
             <div className="right">
               <span className="sortBy">Sort by</span>
-              <span className="sortType">
-                {sortMapper(sort)}
-              </span>
+              <span className="sortType">{sortMapper(sort)}</span>
               <img src="./img/down.png" alt="" onClick={() => setOpen(!open)} />
               {open && (
                 <div className="rightMenu">
-                  <span onClick={() => applySortFilter('createdAt')}>Newest</span>
-                  <span onClick={() => applySortFilter('sales')}>Best Selling</span>
-                  <span onClick={() => applySortFilter('totalStars')}>Popular</span>
+                  <span onClick={() => applySortFilter("createdAt")}>
+                    Newest
+                  </span>
+                  <span onClick={() => applySortFilter("sales")}>
+                    Best Selling
+                  </span>
+                  <span onClick={() => applySortFilter("totalStars")}>
+                    Popular
+                  </span>
                 </div>
               )}
             </div>
