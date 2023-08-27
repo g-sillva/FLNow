@@ -27,10 +27,12 @@ function ServiceCard({ item }) {
         <div className="detail">
           <div className="icons">
             <img src="./img/heart.png" alt="" />
-            <div className="star">
-              <img src="./img/star.png" alt="" />
-              <span>10</span>
-            </div>
+            {!isNaN(item.totalStars / item.starNumber) && (
+              <div className="star">
+                <img src="./img/star.png" alt="" />
+                <span>10</span>
+              </div>
+            )}
           </div>
           <div className="price">
             <span>STARTING AT</span>
