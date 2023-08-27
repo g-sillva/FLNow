@@ -6,7 +6,9 @@ function ServiceCard({ item }) {
   return (
     <Link to={`/service/${item._id}`} className="link">
       <div className="service_card">
-        <img src={item.images[0]} alt="" />
+        <div className="thumbnail_container">
+          <img src={item.images[0]} alt="" />
+        </div>
         <div className="info">
           <div className="user">
             <img src={"/img/avatar.jpg"} alt="" />
