@@ -30,7 +30,7 @@ function ServiceCard({ item }) {
             {!isNaN(item.totalStars / item.starNumber) && (
               <div className="star">
                 <img src="./img/star.png" alt="" />
-                <span>10</span>
+                <span>{Math.round(item.totalStars / item.starNumber)}</span>
               </div>
             )}
           </div>

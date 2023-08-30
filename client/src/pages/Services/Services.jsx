@@ -60,7 +60,7 @@ function Services() {
     <div>
       <div className="services">
         <div className="container">
-          <span className="breadcrumbs">Art > Graphics & Design ></span>
+          <span className="breadcrumbs">Art {">"} Graphics & Design {">"}</span>
           <h1>Services</h1>
           <p>Search for the service you want. When you want.</p>
           <div className="menu">
