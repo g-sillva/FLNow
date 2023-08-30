@@ -38,7 +38,38 @@ function Service() {
       ) : error ? (
         "Something went wrong!"
       ) : (
-        <div className="container">{JSON.stringify(data)}</div>
+        <div className="container">
+          <div className="left">
+            <span className="breadcrumbs">
+              FLNOW {">"} Graphics & Design {">"}
+            </span>
+            <h1>{data.title}</h1>
+            {isLoadingUser ? (
+              "loading"
+            ) : errorUser ? (
+              "Something went wrong!"
+            ) : (
+              <div className="user">
+                <img
+                  className="pp"
+                  src={dataUser.img || "/img/avatar.jpg"}
+                  alt=""
+                />
+                <span>{dataUser.username}</span>
+                {!isNaN(data.totalStars / data.starNumber) && (
+                  <div className="stars">
+                    {Array(Math.round(data.totalStars / data.starNumber))
+                      .fill()
+                      .map((item, i) => (
+                        <img src="/img/star.png" alt="" key={i} />
+                      ))}
+                    <span>{Math.round(data.totalStars / data.starNumber)}</span>
+                  </div>
+                )}
+              </div>
+            )}
+          </div>
+        </div>
       )}
     </div>
   )
