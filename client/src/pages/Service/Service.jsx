@@ -32,6 +32,14 @@ function Service() {
     enabled: !!userId,
   });
 
+  const userInfoList = [
+    { title: "From", desc: dataUser?.country },
+    { title: "Member since", desc: "Aug 2022" },
+    { title: "Avg. response time", desc: "4 hours" },
+    { title: "Last delivery", desc: "1 day" },
+    { title: "Languages", desc: "English" },
+  ]
+
   return (
     <div className="service">
       {isLoading ? (
@@ -101,6 +109,18 @@ function Service() {
                     )}
                     <button>Contact Me</button>
                   </div>
+                </div>
+                <div className="box">
+                  <ul className="items">
+                    {userInfoList.map((item, i) => (
+                      <li key={i} className="item">
+                        <span className="title">{item.title}</span>
+                        <span className="desc">{item.desc}</span>
+                      </li>
+                    ))}
+                  </ul>
+                  <hr />
+                  <p>{dataUser.description}</p>
                 </div>
               </div>
             )}
