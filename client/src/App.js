@@ -8,6 +8,7 @@ import {
   QueryClientProvider,
   useQuery,
 } from "@tanstack/react-query";
+import Navbar from "./components/navbar/Navbar";
 
 function App() {
   const queryClient = new QueryClient();
@@ -15,6 +16,7 @@ function App() {
   return (
     <>
       <QueryClientProvider client={queryClient}>
+        <Navbar />
         <Routes>
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
