@@ -76,6 +76,34 @@ function Service() {
             </Slider>
             <h2>About This service</h2>
             <p>{data.description}</p>
+            {isLoadingUser ? (
+              "loading"
+            ) : errorUser ? (
+              "Something went wrong!"
+            ) : (
+              <div className="seller">
+                <h2>About The Seller</h2>
+                <div className="user">
+                  <img src={dataUser.img || "/img/avatar.jpg"} alt="" />
+                  <div className="info">
+                    <span>{dataUser.username}</span>
+                    {!isNaN(data.totalStars / data.starNumber) && (
+                      <div className="stars">
+                        {Array(Math.round(data.totalStars / data.starNumber))
+                          .fill()
+                          .map((item, i) => (
+                            <img src="/img/star.png" alt="" key={i} />
+                          ))}
+                        <span>
+                          {Math.round(data.totalStars / data.starNumber)}
+                        </span>
+                      </div>
+                    )}
+                    <button>Contact Me</button>
+                  </div>
+                </div>
+              </div>
+            )}
           </div>
         </div>
       )}
