@@ -74,6 +74,8 @@ function Service() {
                 <img key={img} src={img} alt="" />
               ))}
             </Slider>
+            <h2>About This service</h2>
+            <p>{data.description}</p>
           </div>
         </div>
       )}
