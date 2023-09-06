@@ -150,7 +150,7 @@ function Service() {
               ))}
             </div>
             <Link to={`/pay/${id}`}>
-            <button>Continue</button>
+              <button>Hire</button>
             </Link>
           </div>
         </div>
