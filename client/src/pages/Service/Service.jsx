@@ -5,6 +5,7 @@ import { useQuery } from "@tanstack/react-query";
 import newRequest from "../../utils/newRequest";
 import Slider from "infinite-react-carousel";
 import { Link, useParams } from "react-router-dom";
+import Reviews from "../../components/reviews/Reviews";
 
 function Service() {
   const { id } = useParams();
@@ -124,6 +125,7 @@ function Service() {
                 </div>
               </div>
             )}
+            <Reviews serviceId={id} />
           </div>
           <div className="right">
             <div className="price">
