@@ -3,26 +3,35 @@ import './Review.scss'
 
 const Review = ({ review }) => {
   return (
-    <div className='item'>
+    <div className='review'>
         <div className='user'>
             <img className='profile_picture' src="/img/avatar.jpg" alt="" />
             <div className='info'>
                 <span>John Doe</span>
                 <div className='country'>
+                    <img src='/img/flag.png' alt='' />
                     <span>United States</span>
                 </div>
             </div>
         </div>
-        <div className='start'>
+        <div className='stars'>
+            <img src='/img/star.png' alt='' />
+            <img src='/img/star.png' alt='' />
+            <img src='/img/star.png' alt='' />
+            <img src='/img/star.png' alt='' />
             <img src='/img/star.png' alt='' />
             <span>5</span>
         </div>
-        <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ratione, doloremque.</p>
+        <p>This is a random paragraph with length 100. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla euismod, nisl sed tincidunt aliquam, nunc nisl ultrices odio, qui</p>
         <div className='helpful'>
             <span>Helpful?</span>
-            <img src='/img/like.png' alt='' />
+            <div className='icon-wrapper'>
+                <img src='/img/like.png' alt='' />
+            </div>
             <span>Yes</span>
-            <img src='/img/dislike.png' alt='' />
+            <div className='icon-wrapper'>
+                <img src='/img/dislike.png' alt='' />
+            </div>
             <span>No</span>
         </div>
     </div>
