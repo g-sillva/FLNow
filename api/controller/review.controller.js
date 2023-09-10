@@ -1,3 +1,39 @@
-export const func = (req, res) => {
-    // TODO
-}
+import createError from "../utils/createError.js";
+import Review from "../models/review.model.js";
+import Service from "../models/service.model.js";
+
+export const createReview = async (req, res, next) => {
+  if (req.isSeller)
+    return next(createError(403, "Sellers can't create a review."));
+
+  const newReview = new Review({
+    userId: req.userId,
+    ...req.body,
+  });
+
+  try {
+    const review = await Review.findOne({
+      serviceId: req.body.serviceId,
+      userId: req.userId,
+    });
+
+    if (review)
+      return next(createError(400, "You already reviewed this service."));
+
+    const savedReview = await newReview.save();
+
+    await Service.findByIdAndUpdate(req.body.serviceId, {
+      $inc: { totalStars: req.body.star, starNumber: 1 },
+    });
+
+    res.status(201).send(savedReview);
+  } catch (err) {
+    next(err);
+  }
+};
+export const getReviews = async (req, res, next) => {
+  // TODO
+};
+export const deleteReview = async (req, res, next) => {
+  // TODO
+};
