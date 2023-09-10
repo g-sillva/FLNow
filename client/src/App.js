@@ -9,6 +9,7 @@ import {
   useQuery,
 } from "@tanstack/react-query";
 import Navbar from "./components/navbar/Navbar";
+import Orders from "./pages/Orders/Orders";
 
 function App() {
   const queryClient = new QueryClient();
@@ -21,6 +22,7 @@ function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
           <Route path="/" element={<Services />} />
+          <Route path="/orders" element={<Orders />} />
           <Route path="/service/:id" element={<Service />} />
         </Routes>
       </QueryClientProvider>
