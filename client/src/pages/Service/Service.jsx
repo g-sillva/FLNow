@@ -130,17 +130,17 @@ function Service() {
           <div className="right">
             <div className="price">
               <h3>{data.shortTitle}</h3>
-              <h2>$ {data.price}</h2>
+              <h2>$ {data.price / 100}</h2>
             </div>
-            <p>{data.shortDesc}</p>
+            {data.shortDesc && <p>{data.shortDesc}</p>}
             <div className="details">
               <div className="item">
                 <img src="/img/clock.png" alt="" />
-                <span>{data.deliveryDate} Days Delivery</span>
+                <span>{data.deliveryDate || 0} Days Delivery</span>
               </div>
               <div className="item">
                 <img src="/img/recycle.png" alt="" />
-                <span>{data.revisionNumber} Revisions</span>
+                <span>{data.revisionNumber || 0} Revisions</span>
               </div>
             </div>
             <div className="features">
