@@ -33,7 +33,7 @@ export const createReview = async (req, res, next) => {
 };
 export const getReviews = async (req, res, next) => {
   try {
-    const reviews = await Review.find({ serviceId: req.params.id });
+    const reviews = await Review.find({ serviceId: req.params.serviceId });
     res.status(200).send(reviews);
   } catch(err) {
     next(err);
