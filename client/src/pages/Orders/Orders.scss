@@ -21,13 +21,16 @@
           height: 50px;
           display: flex;
           align-items: center;
-          justify-content: space-between;
+          padding: 0 10px;
 
           th {
             text-align: left;
+            flex: 1;
           }
 
           td {
+            flex: 1;
+            align-self: center;
   
             .image {
               width: 50px;
