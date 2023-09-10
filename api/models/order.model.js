@@ -1,4 +1,4 @@
-const mongoose = require('mongoose');
+import mongoose from 'mongoose';
 const { Schema } = mongoose;
 
 const OrderSchema = new Schema({
@@ -7,6 +7,14 @@ const OrderSchema = new Schema({
         required: true,
     },
     serviceId: {
+        type: String,
+        required: true
+    },
+    image: {
+        type: String,
+        required: true
+    },
+    title: {
         type: String,
         required: true
     },
