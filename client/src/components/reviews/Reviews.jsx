@@ -7,6 +7,8 @@ const Reviews = ({ serviceId }) => {
     <div className="reviews">
       <h2>Reviews</h2>
       <Review review={{}} />
+      <hr />
+      <Review review={{}} />
       <div className="add">
         <h3>Add a review</h3>
         <form action="" className="addForm">
