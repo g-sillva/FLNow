@@ -10,6 +10,7 @@ import {
 } from "@tanstack/react-query";
 import Navbar from "./components/navbar/Navbar";
 import Orders from "./pages/Orders/Orders";
+import Messages from "./pages/Messages/Messages";
 
 function App() {
   const queryClient = new QueryClient();
@@ -23,6 +24,7 @@ function App() {
           <Route path="/register" element={<Register />} />
           <Route path="/" element={<Services />} />
           <Route path="/orders" element={<Orders />} />
+          <Route path="/messages" element={<Messages />} />
           <Route path="/service/:id" element={<Service />} />
         </Routes>
       </QueryClientProvider>
