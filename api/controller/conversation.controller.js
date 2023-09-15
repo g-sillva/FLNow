@@ -8,9 +8,10 @@ export const getConversations = (req, res, next) => {
     }
 }
 
-export const getConversation = (req, res, next) => {
+export const getConversation = async (req, res, next) => {
     try {
-
+        const conversation = await Conversation.findOne({ conversationId: req.params.id });
+        res.status(200).send(conversation);
     } catch(err) {
         next(err);
     }
