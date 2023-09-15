@@ -33,9 +33,16 @@ export const createConversation = async (req, res, next) => {
     }
 }
 
-export const updateConversation = (req, res, next) => {
+export const updateConversation = async (req, res, next) => {
     try {
-
+        const updatedConversation = await Conversation.findOneAndUpdate({ conversationId: req.params.id}, {
+            $set: {
+                readBySeller: req.isSeller,
+                readByBuyer: !req.isSeller,
+            }
+        }, { new: true });
+        
+        res.status(200).send(updatedConversation);
     } catch(err) {
         next(err);
     }
