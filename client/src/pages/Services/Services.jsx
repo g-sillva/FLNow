@@ -6,12 +6,17 @@ import { useQuery } from "@tanstack/react-query";
 import { useLocation } from "react-router-dom";
 
 function Services() {
+  const currentUser = JSON.parse(localStorage.getItem("user"));
   const [sort, setSort] = useState("sales");
   const [open, setOpen] = useState(false);
   const minRef = useRef();
   const maxRef = useRef();
 
   const { search } = useLocation();
+
+  if (currentUser?.isSeller) {
+    window.location.href = "/login";
+  }
 
   const {
     isLoading,
