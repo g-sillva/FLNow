@@ -14,7 +14,7 @@ function Services() {
 
   const { search } = useLocation();
 
-  if (currentUser?.isSeller) {
+  if (!currentUser) {
     window.location.href = "/login";
   }
 
