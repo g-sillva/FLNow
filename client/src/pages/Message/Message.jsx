@@ -18,7 +18,6 @@ const Message = () => {
               <p>Description here</p>
             </div>
         </div>
-      <hr />
       <form className="write" >
         <textarea type="text" placeholder="write a message" />
         <button type="submit">Send</button>
