@@ -6,12 +6,12 @@ import Service from "./pages/Service/Service";
 import {
   QueryClient,
   QueryClientProvider,
-  useQuery,
 } from "@tanstack/react-query";
 import Navbar from "./components/navbar/Navbar";
 import Orders from "./pages/Orders/Orders";
 import Messages from "./pages/Messages/Messages";
 import Message from "./pages/Message/Message";
+import Pay from "./pages/Pay/Pay";
 
 function App() {
   const queryClient = new QueryClient();
@@ -28,6 +28,7 @@ function App() {
           <Route path="/messages" element={<Messages />} />
           <Route path="/message/:id" element={<Message />} />
           <Route path="/service/:id" element={<Service />} />
+          <Route path="/pay/:id" element={<Pay />} />
         </Routes>
       </QueryClientProvider>
     </>
