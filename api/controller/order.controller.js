@@ -15,6 +15,15 @@ export const getOrders = async (req, res, next) => {
     }
 }
 
+export const confirmPayment = async (req, res, next) => {
+    try {
+        const order = await Order.findOneAndUpdate({ payment_intent: req.body.payment_intent }, { isCompleted: true });
+        res.status(200).send(order);
+    } catch (error) {
+        next(error)
+    }
+}
+
 export const createPaymentIntent = async (req, res, next) => {
     try {
         const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
