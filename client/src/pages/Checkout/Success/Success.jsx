@@ -1,9 +1,33 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import { useNavigate, useLocation } from 'react-router-dom';
 import "./Success.scss"
+import newRequest from '../../../utils/newRequest';
 
 const Success = () => {
+
+  const { search } = useLocation()
+  const navigate = useNavigate();
+  const params = new URLSearchParams(search);
+
+  const payment_intent = params.get("payment_intent");
+
+  useEffect(() => {
+    const makeRequest = async () => {
+      try {
+        await newRequest.put(`/orders`, { payment_intent });
+        setTimeout(() => {
+          navigate("/orders");
+        }, 5000);
+      } catch (err) {
+        console.log(err);
+      }
+    };
+
+    makeRequest();
+  }, []);
+
   return (
-    <div>Success</div>
+    <div>Payment Successful. You are being redirected to the orders page. Please do not close the page</div>
   )
 }
 
