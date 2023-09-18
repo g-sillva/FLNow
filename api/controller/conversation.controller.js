@@ -1,4 +1,5 @@
 import Conversation from "../models/conversation.model.js";
+import createError from "../utils/createError.js";
 
 export const getConversations = async (req, res, next) => {
   try {
@@ -16,6 +17,7 @@ export const getConversation = async (req, res, next) => {
     const conversation = await Conversation.findOne({
       conversationId: req.params.id,
     });
+    if (!conversation) return next(createError(404, "Conversation not found"));
     res.status(200).send(conversation);
   } catch (err) {
     next(err);

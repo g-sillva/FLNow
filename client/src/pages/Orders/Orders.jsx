@@ -12,8 +12,6 @@ const Orders = () => {
       newRequest.get('/orders').then((res) => res.data),
   });
 
-  const handleContact = () => {};
-
   return (
     <div className="orders">
       {isLoading ? (
@@ -51,7 +49,7 @@ const Orders = () => {
                       src="./img/message.png"
                       alt="placeholder"
                       className="message"
-                      onClick={() => handleContact()}
+                      onClick={() => handleContact(order)}
                     />
                   </td>
                 </tr>
