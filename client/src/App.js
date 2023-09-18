@@ -34,7 +34,7 @@ function App() {
         </Routes>
       </QueryClientProvider>
     </>
-  );
+  )
 }
 
 export default App;
