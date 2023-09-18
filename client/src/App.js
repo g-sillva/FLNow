@@ -12,6 +12,7 @@ import Orders from "./pages/Orders/Orders";
 import Messages from "./pages/Messages/Messages";
 import Message from "./pages/Message/Message";
 import Pay from "./pages/Pay/Pay";
+import Success from "./pages/Checkout/Success/Success";
 
 function App() {
   const queryClient = new QueryClient();
@@ -29,6 +30,7 @@ function App() {
           <Route path="/message/:id" element={<Message />} />
           <Route path="/service/:id" element={<Service />} />
           <Route path="/pay/:id" element={<Pay />} />
+          <Route path="/checkout/success" element={<Success />} />
         </Routes>
       </QueryClientProvider>
     </>
