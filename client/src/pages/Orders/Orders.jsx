@@ -2,15 +2,35 @@ import React from "react";
 import "./Orders.scss";
 import { useQuery } from "@tanstack/react-query";
 import newRequest from "../../utils/newRequest";
+import { useNavigate } from "react-router-dom";
 
 const Orders = () => {
   const user = JSON.parse(localStorage.getItem("user"));
+
+  const navigate = useNavigate();
 
   const { isLoading, error, data } = useQuery({
     queryKey: ["orders"],
     queryFn: () =>
       newRequest.get('/orders').then((res) => res.data),
   });
+
+  const handleContact = async (order) => {
+    const { sellerId, buyerId } = order;
+    const id = sellerId + buyerId;
+
+    try {
+      const res = await newRequest.get(`/conversations/${id}`);
+      navigate(`/messages/${res.data.id}`);
+    } catch (err) {
+      if (err.response.status === 404) {
+        const res = await newRequest.post(`/conversations`, {
+          to: user.isSeller ? buyerId : sellerId,
+        });
+        navigate(`/messages/${res.data.id}`);
+      }
+    }
+  };
 
   return (
     <div className="orders">
