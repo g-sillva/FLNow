@@ -1,27 +1,6 @@
 import Order from "../models/order.model.js"
 import Service from "../models/service.model.js"
-import createError from "../utils/createError.js"
-
-export const createOrder = async (req, res, next) => {
-    try {
-        const service = await Service.findById(req.params.serviceId);
-
-        const newOrder = new Order({
-            serviceId: service._id,
-            image: service.images[0],
-            title: service.title,
-            buyerId: req.userId,
-            sellerId: service.userId,
-            price: service.price,
-            payment_intent: "temporary"
-        });
-
-        await newOrder.save();
-        res.status(201).send({ message: "Order created successfully" });
-    } catch (error) {
-        next(error)
-    }
-}
+import Stripe from "stripe"
 
 export const getOrders = async (req, res, next) => {
     try {
@@ -31,6 +10,37 @@ export const getOrders = async (req, res, next) => {
         });
 
         res.status(200).send(orders);
+    } catch (error) {
+        next(error)
+    }
+}
+
+export const createPaymentIntent = async (req, res, next) => {
+    try {
+        const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
+
+        const service = await Service.findById(req.params.id);
+
+        const paymentIntent = await stripe.paymentIntents.create({
+            amount: service.price,
+            currency: "usd",
+            automatic_payment_methods: {
+                enabled: true
+            }
+        });
+
+        const newOrder = new Order({
+            serviceId: service._id,
+            image: service.images[0],
+            title: service.title,
+            buyerId: req.userId,
+            sellerId: service.userId,
+            price: service.price,
+            payment_intent: paymentIntent.id
+        });
+
+        await newOrder.save();
+        res.status(200).send({ client_secret: paymentIntent.client_secret });
     } catch (error) {
         next(error)
     }
